@@ -1,0 +1,36 @@
+{
+  "name": "js-restfull-api",
+  "version": "1.0.0",
+  "description": "belajar Node js RESTFUL AP",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
+  "keywords": [],
+  "author": "Azmi",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@prisma/client": "^5.21.1",
+    "bcrypt": "^5.1.1",
+    "express": "^4.21.1",
+    "joi": "^17.13.3",
+    "uuid": "^10.0.0",
+    "winston": "^3.15.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.25.9",
+    "@types/bcrypt": "^5.0.2",
+    "@types/jest": "^29.5.14",
+    "@types/uuid": "^10.0.0",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "prisma": "^5.21.1",
+    "supertest": "^7.0.0"
+  }
+}
