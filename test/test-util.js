@@ -18,3 +18,19 @@ export const createTestUser = async () => {
         }
     })
 }
+
+export const getTestUser = async () => {
+    return await prismaClient.user.findUnique({
+        where: {
+            username: "test"
+        }
+    });
+}
+
+export const removeAllTextContacts = async () => {
+    return await prismaClient.contact.deleteMany({
+        where: {
+            username: "test"
+        }
+    });
+}

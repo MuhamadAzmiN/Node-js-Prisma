@@ -1,7 +1,7 @@
 import supertest from "supertest";
 import { web } from "../src/application/web.js";
 import { prismaClient } from "../src/application/database.js";
-import { removeTestUser,createTestUser } from "./test-util.js";
+import { removeTestUser,createTestUser, getTestUser } from "./test-util.js";
 import {looger} from "../src/application/logging.js";
 
 
@@ -31,9 +31,9 @@ describe('POST /api/users', function () {
             name: ""
         });
         
-        // logger.info("Response Body:", result.body); 
+        
         expect(result.status).toBe(400);
-        // console.log(result.body.errors)
+        console.log(result.body.errors)
         
         expect(result.body.errors).toBeDefined(); // Pastikan ini sesuai dengan respons Anda
     });
@@ -57,6 +57,7 @@ describe('POST /api/users', function () {
             username: "test",
             password: "rahasia",
             name: "test"
+            
         });
         
         expect(result.status).toBe(400);
@@ -113,3 +114,29 @@ beforeEach(async () => {
     });
 
 })
+
+
+
+describe('DELETE /api/users/logout', function() {
+    beforeEach(async () => {
+        await createTestUser();
+    })
+
+    afterEach(async () => {
+        await removeTestUser();
+    });
+
+
+    it('should can logout', async () => {
+        const result = await supertest(web).delete('/api/users/logout').set('Authorization', 'test');
+
+        expect(result.status).toBe(200)
+        expect(result.body.data).toBe("OK")
+
+
+        const user = await getTestUser()
+        expect(user.token).toBeNull()
+    })
+})
+
+

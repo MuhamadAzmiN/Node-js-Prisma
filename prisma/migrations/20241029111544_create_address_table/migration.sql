@@ -1,9 +1,10 @@
 -- CreateTable
 CREATE TABLE `Addresses` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `street` VARCHAR(100) NULL,
+    `street` VARCHAR(255) NULL,
     `province` VARCHAR(100) NULL,
-    `country` VARCHAR(100) NULL,
+    `city` VARCHAR(100) NULL,
+    `country` VARCHAR(100) NOT NULL,
     `postal_code` VARCHAR(100) NULL,
     `contact_id` INTEGER NOT NULL,
 

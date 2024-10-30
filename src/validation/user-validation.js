@@ -1,4 +1,3 @@
-import { join } from "@prisma/client/runtime/library";
 import Joi from "joi";
 const registerUserValidation = Joi.object({
     username: Joi.string().max(100).required(),
@@ -15,9 +14,21 @@ const loginUserValidation = Joi.object({
 
 const getUserValidation = Joi.string().max(100).required();
 
+const updateUserValidation = Joi.object({
+    username : Joi.string().max(100).required(),
+    password : Joi.string().max(100).optional(),
+    name : Joi.string().max(100).optional()
+})
+
+
+const logoutUserValidation = Joi.object({
+    token : Joi.string().max(100).required()
+})
 export {
     registerUserValidation,
     loginUserValidation,
-    getUserValidation
+    getUserValidation,
+    updateUserValidation,
+    logoutUserValidation
 }
 
