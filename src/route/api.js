@@ -13,9 +13,9 @@ userRouter.patch('/api/users/current', userController.update)
 userRouter.delete('/api/users/logout', userController.logout)
 
 // contact api
-
 userRouter.post("/api/contacts", contactController.create)
-
+userRouter.get("/api/contacts/:contactId", contactController.get)
+userRouter.put("/api/contacts/:contactId", contactController.update)
 export {
     userRouter
 }

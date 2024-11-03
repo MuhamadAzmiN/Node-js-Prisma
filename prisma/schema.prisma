@@ -10,27 +10,27 @@ datasource db {
   url = env("DATABASE_URL") // Pastikan DATABASE_URL di .env sudah benar
 }
 
-model User {
-  username String   @id @db.VarChar(100) // Kunci utama
-  password String   @db.VarChar(100) // Menyimpan kata sandi
-  name     String   @db.VarChar(100) // Menyimpan nama pengguna
-  token    String?  @db.VarChar(100) // Token opsional
-  contacts Contact[] // Relasi ke model Contact
-  @@map("users") // Pemetaan ke tabel "users" di database
-}
+  model User {
+    username String   @id @db.VarChar(100) // Kunci utama
+    password String   @db.VarChar(100) // Menyimpan kata sandi
+    name     String   @db.VarChar(100) // Menyimpan nama pengguna
+    token    String?  @db.VarChar(100) // Token opsional
+    contacts Contact[] // Relasi ke model Contact
+    @@map("users") // Pemetaan ke tabel "users" di database
+  }
 
 
-model Contact {
-  id         Int     @id @default(autoincrement())
-  first_name String  @db.VarChar(100)
-  last_name  String? @db.VarChar(100)
-  email      String? @db.VarChar(100)
-  phone      String? @db.VarChar(10)
-  username   String  @db.VarChar(100)
-  user       User    @relation(fields: [username], references: [username])
-  addresses Address[]
-  @@map("contacts")
-}
+  model Contact {
+    id         Int     @id @default(autoincrement())
+    first_name String  @db.VarChar(100)
+    last_name  String? @db.VarChar(100)
+    email      String? @db.VarChar(100)
+    phone      String? @db.VarChar(10)
+    username   String  @db.VarChar(100)
+    user       User    @relation(fields: [username], references: [username])
+    addresses Address[]
+    @@map("contacts")
+  }
 
 model Address {
   id          Int      @id @default(autoincrement())

@@ -1,7 +1,7 @@
 import { prismaClient } from "../src/application/database";
 import bcrypt from "bcrypt";
 export const removeTestUser = async () => {
-    await prismaClient.user.deleteMany({
+    return prismaClient.user.deleteMany({
         where: {
             username: "test"
         }
@@ -9,7 +9,7 @@ export const removeTestUser = async () => {
 }
 
 export const createTestUser = async () => {
-    await prismaClient.user.create({
+    await  prismaClient.user.create({
         data : {
             username : "test",
             name : "test",
@@ -19,8 +19,11 @@ export const createTestUser = async () => {
     })
 }
 
+
+
+
 export const getTestUser = async () => {
-    return await prismaClient.user.findUnique({
+    return prismaClient.user.findUnique({
         where: {
             username: "test"
         }
@@ -28,7 +31,32 @@ export const getTestUser = async () => {
 }
 
 export const removeAllTextContacts = async () => {
-    return await prismaClient.contact.deleteMany({
+     await prismaClient.contact.deleteMany({
+        where: {
+            username: "test"
+        }
+    });
+}
+
+
+
+
+export const createTestContact = async () => {
+    return  prismaClient.contact.create({
+        data : {
+            username : "test",
+            first_name : "test",
+            last_name : "test",
+            email : "test@gmail",
+            phone : "08"
+        }
+    })
+}
+
+
+
+export const getTestContact = async () => {
+    return prismaClient.contact.findFirst({
         where: {
             username: "test"
         }

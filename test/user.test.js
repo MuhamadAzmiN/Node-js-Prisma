@@ -8,6 +8,7 @@ import {looger} from "../src/application/logging.js";
 describe('POST /api/users', function () {
     
     afterEach(async () => {
+        
         await removeTestUser();
     });
 
@@ -18,6 +19,7 @@ describe('POST /api/users', function () {
             name: "test"
         });
         
+        console.log(result.body)
         expect(result.status).toBe(200);
         expect(result.body.data.username).toBe("test");
         expect(result.body.data.name).toBe("test");
@@ -49,6 +51,7 @@ describe('POST /api/users', function () {
         });
         
         expect(result.status).toBe(200);
+        console.log(result.status)
         expect(result.body.data.username).toBe("test");
         expect(result.body.data.name).toBe("test");
         expect(result.body.data.password).toBeUndefined();
@@ -59,6 +62,9 @@ describe('POST /api/users', function () {
             name: "test"
             
         });
+
+
+        console.log(result.body)
         
         expect(result.status).toBe(400);
         expect(result.body.errors).toBeDefined();
@@ -125,8 +131,6 @@ describe('DELETE /api/users/logout', function() {
     afterEach(async () => {
         await removeTestUser();
     });
-
-
     it('should can logout', async () => {
         const result = await supertest(web).delete('/api/users/logout').set('Authorization', 'test');
 
