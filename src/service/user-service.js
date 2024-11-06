@@ -9,26 +9,31 @@ import { valid } from "joi";
 
 
 const register = async (request) => {
-    // Validasi input
+    // Validasi data pengguna
     const user = validate(registerUserValidation, request);
 
+    // Cek apakah username sudah ada
     const countUser = await prismaClient.user.count({
         where: { username: user.username }
     });
     
-    if (countUser === 1) { // Cek apakah username sudah ada
-        throw new ResponseError(400, "Username already");
+    if (countUser === 1) {
+        throw new ResponseError(400, "Username already exists");
     }
-    user.password = await bcrypt.hash(user.password, 10); // Menambahkan await di sini
+
+    // Hash password
+    user.password = await bcrypt.hash(user.password, 10);
     
-    // Buat user baru
-    return prismaClient.user.create({
+    // Buat user baru dan pilih kolom yang ingin ditampilkan
+    const result = await prismaClient.user.create({
         data: user,
         select: {
             username: true,
             name: true
         }
     });
+
+    return result;
 };
 
 

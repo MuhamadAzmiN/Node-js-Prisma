@@ -1,15 +1,19 @@
 import { prismaClient } from "../src/application/database";
 import bcrypt from "bcrypt";
+
+
+
 export const removeTestUser = async () => {
-    return prismaClient.user.deleteMany({
+    await prismaClient.user.deleteMany({
         where: {
             username: "test"
         }
     });
 }
 
+
 export const createTestUser = async () => {
-    await  prismaClient.user.create({
+    await prismaClient.user.create({
         data : {
             username : "test",
             name : "test",
@@ -20,8 +24,6 @@ export const createTestUser = async () => {
 }
 
 
-
-
 export const getTestUser = async () => {
     return prismaClient.user.findUnique({
         where: {
@@ -30,8 +32,9 @@ export const getTestUser = async () => {
     });
 }
 
-export const removeAllTextContacts = async () => {
-     await prismaClient.contact.deleteMany({
+
+export const removeAllTestContact = async () => {
+    await prismaClient.contact.deleteMany({
         where: {
             username: "test"
         }
@@ -39,15 +42,13 @@ export const removeAllTextContacts = async () => {
 }
 
 
-
-
 export const createTestContact = async () => {
-    return  prismaClient.contact.create({
-        data : {
-            username : "test",
+    await prismaClient.contact.create({
+        data: {
+            username: "test",
             first_name : "test",
             last_name : "test",
-            email : "test@gmail",
+            email : "test@gmail.com",
             phone : "08"
         }
     })
@@ -60,5 +61,5 @@ export const getTestContact = async () => {
         where: {
             username: "test"
         }
-    });
+    })
 }

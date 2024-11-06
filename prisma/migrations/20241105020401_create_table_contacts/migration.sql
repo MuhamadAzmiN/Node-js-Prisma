@@ -4,7 +4,7 @@ CREATE TABLE `contacts` (
     `first_name` VARCHAR(100) NOT NULL,
     `last_name` VARCHAR(100) NULL,
     `email` VARCHAR(100) NULL,
-    `phone` VARCHAR(20) NULL,
+    `phone` VARCHAR(10) NULL,
     `username` VARCHAR(100) NOT NULL,
 
     PRIMARY KEY (`id`)

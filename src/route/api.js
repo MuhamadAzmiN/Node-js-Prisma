@@ -6,18 +6,18 @@ import { authMiddleware } from "../middleware/auth-middleware"
 const userRouter = new express.Router()
 userRouter.use(authMiddleware)
 
-// user api
-
 userRouter.get("/api/users/current", userController.get)
 userRouter.patch('/api/users/current', userController.update)
 userRouter.delete('/api/users/logout', userController.logout)
 
-// contact api
-userRouter.post("/api/contacts", contactController.create)
-userRouter.get("/api/contacts/:contactId", contactController.get)
-userRouter.put("/api/contacts/:contactId", contactController.update)
+
+
+userRouter.post('/api/contacts', contactController.create)
+userRouter.get('/api/contacts/:contactId', contactController.get)
+userRouter.put('/api/contacts/:contactId', contactController.update)
+userRouter.delete('/api/contacts/:contactId', contactController.remove)
 export {
-    userRouter
+    userRouter, 
 }
 
 

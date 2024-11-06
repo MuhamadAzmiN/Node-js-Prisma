@@ -8,7 +8,6 @@ import {looger} from "../src/application/logging.js";
 describe('POST /api/users', function () {
     
     afterEach(async () => {
-        
         await removeTestUser();
     });
 
@@ -76,6 +75,8 @@ describe('POST /api/users', function () {
 describe('POST /api/users/login', function () {
     beforeEach(async () => {
         await createTestUser();
+        const user = await getTestUser(); // Memastikan user sudah ada
+        console.log("Current Test User:", user);
 
     })
 
@@ -142,5 +143,8 @@ describe('DELETE /api/users/logout', function() {
         expect(user.token).toBeNull()
     })
 })
+
+
+
 
 

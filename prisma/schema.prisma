@@ -32,6 +32,7 @@ datasource db {
     @@map("contacts")
   }
 
+
 model Address {
   id          Int      @id @default(autoincrement())
   street      String?  @db.VarChar(100)
@@ -43,3 +44,4 @@ model Address {
 
   @@map("Addresses")
 }
+
