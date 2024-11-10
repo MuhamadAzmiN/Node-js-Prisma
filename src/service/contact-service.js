@@ -1,8 +1,8 @@
 
-import { validate } from "../validation/validation"
-import { prismaClient } from "../application/database"
-import { createContactValidation, getContactValidation, seacrhContactValidation, updateContactValidation } from "../validation/contact-validation"
-import { ResponseError } from "../error/response-error";
+import { validate } from "../validation/validation.js"
+import { prismaClient } from "../application/database.js"
+import { createContactValidation, getContactValidation, seacrhContactValidation, updateContactValidation } from "../validation/contact-validation.js"
+import { ResponseError } from "../error/response-error.js";
 
 
 

@@ -1,8 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import logger from "./logging"; // Pastikan ini impor default
+import { logger } from './logging.js';
+
 
 export const prismaClient = new PrismaClient({
-    log: [
+    log: [  
         { emit: 'event', level: 'query' },
         { emit: 'event', level: 'error' },
         { emit: 'event', level: 'info' },

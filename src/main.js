@@ -1,11 +1,9 @@
-import { web } from "./application/web";
-import { logger } from "./application/logging";
+import { web } from "./application/web.js";
+import { logger } from "./application/logging.js";
 
-// Menggunakan variabel lingkungan untuk port
-const PORT = process.env.PORT || 3000;
+
+const PORT = process.env.PORT || 3026;
 
 web.listen(PORT, () => {
     logger.info(`Server is running on port ${PORT}`);
-}).on('error', (err) => {
-    logger.error(`Failed to start server: ${err.message}`);
-});
+})

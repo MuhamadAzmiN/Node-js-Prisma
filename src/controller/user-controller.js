@@ -1,9 +1,4 @@
-import userService from "../service/user-service";
-import { validate } from "../validation/validation"; // Import validasi jika ada
-import { registerUserValidation } from "../validation/user-validation"; // Import schema validasi
-import { response } from "express";
-import { log } from "winston";
-
+import userService from "../service/user-service.js";
 const register = async (req, res, next) => {
     try {
         // validate(registerUserValidation, req.body);

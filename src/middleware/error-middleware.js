@@ -1,5 +1,6 @@
-import { ValidationError } from "joi";
-import { ResponseError } from "../error/response-error"; // Gantilah sesuai dengan path yang sesuai
+import Joi from "joi"; // Mengimpor seluruh modul joi
+const { ValidationError } = Joi; // Mengakses ValidationError dari Joi
+import { ResponseError } from "../error/response-error.js"; // Gantilah sesuai dengan path yang sesuai
 
 const errorMiddleware = async (err, req, res, next) => {
     if (!err) {
@@ -13,10 +14,8 @@ const errorMiddleware = async (err, req, res, next) => {
             errors: err.details.map(detail => detail.message), // Menggunakan details untuk mendapatkan pesan kesalahan
         });
     } else {    
-        
         res.status(500).json({ errors: err.message });
     }
 };
 
 export { errorMiddleware };
-

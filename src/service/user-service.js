@@ -1,11 +1,10 @@
-import { validate } from "../validation/validation";
-import {loginUserValidation, registerUserValidation, getUserValidation, updateUserValidation } from "../validation/user-validation";
-import { prismaClient } from "../application/database";
-import { ResponseError } from "../error/response-error";
+import { validate } from "../validation/validation.js";
+import {loginUserValidation, registerUserValidation, getUserValidation, updateUserValidation } from "../validation/user-validation.js";
+import { prismaClient } from "../application/database.js";
+import { ResponseError } from "../error/response-error.js";
 import bcrypt from "bcrypt";
-import { request } from "express";
 import {v4 as uuid} from "uuid"
-import { valid } from "joi";
+
 
 
 const register = async (request) => {
