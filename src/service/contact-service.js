@@ -1,7 +1,7 @@
 
 import { validate } from "../validation/validation"
 import { prismaClient } from "../application/database"
-import { createContactValidation, getContactValidation, updateContactValidation } from "../validation/contact-validation"
+import { createContactValidation, getContactValidation, seacrhContactValidation, updateContactValidation } from "../validation/contact-validation"
 import { ResponseError } from "../error/response-error";
 
 
@@ -114,10 +114,87 @@ const remove = async (user, contactId) => {
 }
 
 
+const seacrh = async (user, request) => {
+    request = validate(seacrhContactValidation, request)
+    const skip = (request.page - 1) * request.size
+    const filters = [];
+
+
+    filters.push(
+        {
+            username : user.username
+        }
+    )
+
+    if(request.name){
+        filters.push(
+            {
+                OR : [
+                    {
+                        first_name  : {
+                            contains : request.name
+                        }
+                    },
+                    {
+                        last_name : {
+                            contains : request.name
+                        }
+                    }
+                ]
+            },
+        )
+    }
+
+
+    if(request.email){
+        filters.push(
+            {
+                email : {
+                    contains: request.email
+                }
+            },
+        )
+    }
+
+
+    if(request.phone) {
+        filters.push(
+            {
+                phone : {
+                    contains: request.phone
+                }
+            }
+        )
+    }
+    const contacts = await prismaClient.contact.findMany({
+        where : {
+            AND : filters
+        },
+        take: request.size,
+        skip
+    })
+
+    const totalItems = await prismaClient.contact.count({
+        where : {
+            AND : filters
+        }
+    })
+
+    return {
+        data : contacts,
+        paging : {
+            page : request.page,
+            total_items : totalItems,
+            total_page : Math.ceil(totalItems/ request.size)
+        }
+    }
+}
+
 
 export default {
     create,
     get,
     update,
-    remove
+    remove,
+    seacrh
 }

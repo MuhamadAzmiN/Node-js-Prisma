@@ -1,7 +1,7 @@
 
 import supertest from "supertest";
 import { web } from "../src/application/web";
-import { removeAllTestContact, removeTestUser, createTestUser, getTestUser, createTestContact, getTestContact} from "../test/test-util"
+import { removeAllTestContact, removeTestUser, createTestUser, getTestUser, createTestContact, getTestContact, createManyTestContact} from "../test/test-util"
 import { text } from "express";
 
 describe('POST /api/contacts', function () {
@@ -135,4 +135,43 @@ describe('DELETE /api/contacts/:contactId', function () {
         testContact = await getTestContact()
         expect(testContact).toBeNull()
     })
+    
 })
+
+
+describe('GET /api/contacts', function () {
+    beforeEach(async () => {
+        await createTestUser();
+        await createManyTestContact()
+    })
+
+
+    afterEach(async () => {
+        await removeAllTestContact();
+        await removeTestUser()
+    })
+    
+
+    it('should get a contact', async () => {
+        const result = await supertest(web)
+        .get('/api/contacts')
+        .query({
+            page:2
+        })
+        .set('Authorization', 'test');
+
+        console.log(result.status)
+        expect(result.status).toBe(200);
+        expect(result.body.data.length).toBe(5);
+        expect(result.body.paging.page).toBe(2);
+        expect(result.body.paging.total_page).toBe(2);
+        expect(result.body.paging.total_items).toBe(15);
+    })
+})
+
+
+
+
+
+
+
