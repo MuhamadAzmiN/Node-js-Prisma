@@ -19,7 +19,7 @@ const register = async (request) => {
     if (countUser === 1) {
         throw new ResponseError(400, "Username already exist");
     }
-
+    
     // Hash password
     user.password = await bcrypt.hash(user.password, 10);
     

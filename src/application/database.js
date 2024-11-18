@@ -28,3 +28,5 @@ prismaClient.$on('info', (e) => {
 prismaClient.$on('query', (e) => {
     logger.info(e); // Menggunakan info untuk mencatat query
 });
+
+

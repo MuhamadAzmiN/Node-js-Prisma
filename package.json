@@ -4,7 +4,7 @@
   "description": "belajar Node js RESTFUL AP",
   "main": "src/main.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest -i"
   },
   "jest": {
     "transform": {
@@ -20,6 +20,8 @@
     "bcrypt": "^5.1.1",
     "express": "^4.21.1",
     "joi": "^17.13.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "uuid": "^10.0.0",
     "winston": "^3.15.0"
   },
